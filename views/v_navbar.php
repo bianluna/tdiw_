@@ -36,16 +36,27 @@
         <div class="nav-icons" id="icons">
             <?php
             session_start();
-             
-            if (isset($_SESSION['user_id']) && $_SESSION['user_id'] != 0) {
-                echo '<p class="user-name">' . $_SESSION['user_name'] . '</p>';
-            } ?>
-            <a href="login.php">
-                <img src="../resources/icon/user.png" alt="User Icon" width="40px" />
-            </a>
-            <a href="#" onclick="showCart(event)">
-                <img src="../resources/icon/shoppingBag.png" alt="Cart Icon" width="40px" />
-            </a>
+            ?>
+            <div class="dropdown">
+                <?php
+                if (isset($_SESSION['user_id']) && $_SESSION['user_id'] != 0) {
+                    echo '<a href="#" class="user-name" onclick="configUser()">' . $_SESSION['user_name'] . '</a>';
+                } ?>
+                <div class="dropdown-content">
+                    <?php
+                    echo '<a href="#" class="dropdown-item" onClick="getHistory(event)"
+                            data-category-id="' . htmlentities($categoria['category_id']) . '">' . 'Historial de pedidos' . '</a>';
+                    echo '<a href="#" class="dropdown-item" onClick="logout()"
+                            data-category-id="' . htmlentities($categoria['category_id']) . '">'  . 'Cerrar sesión' . '</a>';
+                    ?>
+                </div>
+            </div>
+                <a href="login.php">
+                    <img src="../resources/icon/user.png" alt="User Icon" width="40px" />
+                </a>
+                <a href="#" onclick="showCart(event)">
+                    <img src="../resources/icon/shoppingBag.png" alt="Cart Icon" width="40px" />
+                </a>
+            </div>
         </div>
-    </div>
 </nav>

@@ -192,18 +192,44 @@ async function pay(user_id) {
     else {
         console.log("User ID: ", user_id);
         alert("Your are user ID: " + user_id);
-        
+
         var response = await fetch("../controller/c_pay.php?user_id=" + user_id);
         const responsetxt = await response.text();
         const responsetrim = responsetxt.trim();
 
         if (responsetrim == "true") {
-            window.location.href = "../paymentCompleted.php";
+            window.location.href = "../payment.php";
         }
         else {
             alert("Error processing payment. Please try again.");
         }
     }
+}
 
+async function configUser() {
+    window.location.href = "../userModifyData.php";
+}
 
+async function logout() {
+    var response = await fetch("../controller/c_logout.php");
+    const responsetxt = await response.text();
+    const responsetrim = responsetxt.trim();
+    alert(responsetrim);
+    window.location.href = "../index.php";
+}
+
+async function getHistory() {
+    var response = await fetch("../controller/c_history.php");
+    const responsetxt = await response.text();
+    const responsetrim = responsetxt.trim();
+
+    const homeElement = document.getElementById('home');
+    homeElement.style.display = 'none';
+
+    const bookElement = document.getElementById('book-display');
+    bookElement.style.display = 'none';
+    
+    const cartElement = document.getElementById('cart-display');
+    cartElement.innerHTML = responsetrim;
+    cartElement.style.display = 'inline';
 }

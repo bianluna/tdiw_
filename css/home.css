@@ -43,3 +43,26 @@
     background: radial-gradient(circle, rgba(227,169,238,0.20780812324929976) 17%, rgba(235,235,235,1) 100%);
 }
 
+.cart-footer{
+    padding: 50px;
+    padding-left: 200px;
+    width: -webkit-fill-available;
+    text-align: start;
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    
+}
+
+#cart-footer-content{
+    width: 600px;
+    height: 400px;
+}
+
+.cart-footer-tags{
+    font-weight: 700;
+}
+
+.cart-summary{
+    font-family: monospace;
+}

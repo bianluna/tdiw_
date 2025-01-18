@@ -90,7 +90,7 @@
 
 	<!-- Visible cart -->
 	<section class="cart-footer" id="always-visible-cart">
-		<div id="cart-footer-content">
+		<div class="card" id="cart-footer-content">
 			<?php require __DIR__ . '/controller/c_visibleCart.php'; ?>
 		</div>
 	</section>

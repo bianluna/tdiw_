@@ -24,20 +24,28 @@ CREATE TABLE categories
   PRIMARY KEY (category_id)
 );
 
-CREATE TABLE orderlines
-(
-  orderline_id serial NOT NULL,
-  quantity     INT    NOT NULL,
-  order_id     serial NOT NULL,
-  book_id      serial NOT NULL,
-  PRIMARY KEY (orderline_id)
+DROP TABLE IF EXISTS orderlines;
+CREATE TABLE orderlines(
+    orderline_id SERIAL NOT NULL,
+    quantity integer NOT NULL,
+    order_id integer NOT NULL,
+    book_id integer NOT NULL,
+    book_title varchar(255),
+    book_price double precision,
+    PRIMARY KEY(orderline_id),
+    CONSTRAINT fk_orders_to_orderlines FOREIGN key(order_id) REFERENCES orders(order_id),
+    CONSTRAINT fk_books_to_orderlines FOREIGN key(book_id) REFERENCES books(book_id)
 );
 
-CREATE TABLE orders
-(
-  order_id serial NOT NULL,
-  user_id  serial NOT NULL,
-  PRIMARY KEY (order_id)
+DROP TABLE IF EXISTS orders;
+CREATE TABLE orders(
+    order_id SERIAL NOT NULL,
+    user_id integer NOT NULL,
+    "date" date,
+    quantity integer,
+    total_price double precision,
+    PRIMARY KEY(order_id),
+    CONSTRAINT fk_users_to_orders FOREIGN key(user_id) REFERENCES users(user_id)
 );
 
 DROP TABLE IF EXISTS users;

@@ -23,4 +23,22 @@ function saveUserInDB($connection, $name, $email, $password, $address,  $city,  
     return false; // Failed to insert
   }
 }
+
+function updateUserInDB($connection, $name, $email, $password, $address,  $city,  $postal_code, $phone_number)
+{
+  $sql_user = "
+        UPDATE users
+        SET name = $1, email = $2, password = $3, address = $4, city = $5, postal_code = $6, phone_number = $7
+        WHERE user_id = $8
+    ";
+
+  // Hash the password securely before storing
+  $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+  // Execute the prepared statement
+  $params = [$name, $email, $hashedPassword, $address,  $city,  strval($postal_code), $phone_number, $_SESSION['user_id']];
+  $result = pg_query_params($connection, $sql_user, $params);
+
+}
+
 ?>
