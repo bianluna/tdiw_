@@ -1,0 +1,57 @@
+#back-shop-button{
+    color: #1c5c69;
+    background-color: #70c5d6;
+    width: auto;
+    height: auto;
+    font-size: medium;
+}
+
+.button-quantity{
+    color: #1c5c69;
+    background-color: #70c5d6;
+    font-size: medium;
+    font-family: "Nunito", sans-serif;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.16);
+    border: 0;
+    border-radius: 50px;
+}
+
+.bottom-section-cart{
+
+    display: grid;
+    grid-template-areas: 'button-pay button-empty';
+    justify-content: space-between;
+    align-items: center;
+}
+
+#quantity{
+    background-color: #70c5d64b;
+    font-size: medium;
+    font-family: "Nunito", sans-serif;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.16);
+    border: 0;
+    border-radius: 50px;
+    text-align: center;
+    color: dimgray;
+}
+
+#button-pay{
+    color: #1c5c69;
+    background-color: #70c5d6;
+    width: auto;
+    height: auto;
+    font-size: medium;
+}
+
+#button-empty{
+    color: #680900;
+    background-color: #ff6161;
+    width: auto;
+    height: auto;
+    font-size: medium;
+}
+
+#empty-cart-text{
+    font-size: 20px;
+    text-align: center;
+}

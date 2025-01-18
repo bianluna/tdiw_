@@ -1,0 +1,44 @@
+.container-signup{
+    display: grid;
+    justify-content: center;
+    margin-top: 80px;
+}
+
+form{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas de igual tamaño */
+    gap: 20px; /* Espacio entre filas y columnas */
+}
+
+.text-fields{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+input{
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 5px;
+
+}
+
+
+.password-field{
+    margin-top: 0;
+    width: 95%;
+    padding: 10px;
+    font-size: 14px;
+    font-family: monospace;
+    border: 3px solid #9B8C7D ;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    outline:none;
+}
+
+#button-signup{
+    width: 30%;
+    font-family: monospace;
+    padding: 10px;
+
+}

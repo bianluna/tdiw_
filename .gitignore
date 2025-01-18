@@ -1,0 +1,13 @@
+.vscode/*
+
+Makefile
+docker-compose*
+
+#Local development
+.htaccess
+*.log
+.rsyncignore
+
+# LOCAL DB
+pgdata
+postgres_data

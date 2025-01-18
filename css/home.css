@@ -1,0 +1,45 @@
+.container h1 {
+    margin-bottom: 0;
+}
+
+
+#bos{
+    background-color: #F7F8FA;
+    display: grid;
+    grid-template-areas: 'text_bos cover_bos';
+    padding: 90px;
+}
+
+#text_bos{
+    text-align: left;
+    padding-right: 200px;  
+}
+
+#header_bos{
+    margin-bottom: 50px;
+}
+
+#title_bos{
+    margin-bottom: 5px;
+}
+
+#subtitle_bos{
+    margin-top: 0;
+    color:#9b8c7d ;
+}
+
+#img_bos{
+    width: 60%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+} 
+
+#button_bos{
+    margin-top:10%; 
+}
+
+
+#cover{
+    background: rgb(227,169,238);
+    background: radial-gradient(circle, rgba(227,169,238,0.20780812324929976) 17%, rgba(235,235,235,1) 100%);
+}
+
