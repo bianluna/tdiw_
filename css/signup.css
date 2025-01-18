@@ -7,20 +7,74 @@
 form{
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* 2 columnas de igual tamaño */
-    gap: 20px; /* Espacio entre filas y columnas */
+    gap: 40px; /* Espacio entre filas y columnas */
 }
 
 .text-fields{
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 2px;
+    padding: 10px;
+}
+
+label{
+    padding: 10px;
+    color:#2e2d2d ;
 }
 
 input{
-    padding: 10px;
-    border: 1px solid;
-    border-radius: 5px;
+    padding: 15px;
+    border: 2px solid transparent;
+    border-radius: 25px;
+    width: 100%;
+    font-family: monospace;
+    color:#2e2d2d ;
+}
 
+input:hover {
+    outline: none;
+    border: 2px solid;
+    border-color: #FF8156;
+}
+
+input:focus {
+    outline: none;
+    border: 2px solid;
+    border-color: #FF7BB5;
+}
+
+
+
+#button-signup{
+    display: flex;
+    padding: 25px;
+    cursor: pointer;
+    color: #1c5c69;
+    background-color: #a5d6e0c0;
+    font-size: medium;
+    font-family: "Nunito", sans-serif;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.16);
+    width: fit-content;
+    align-items: center;
+    height: 40px;
+    border-radius: 50px;
+
+}
+
+#register-text{
+    text-align: center;
+    padding: 30px;
+    color:#2e2d2d ;
+}
+
+#header-signup{
+    text-align: center;
+
+}
+
+.button-section{
+    justify-self: center;
+    padding: 20px;
 }
 
 
@@ -36,9 +90,3 @@ input{
     outline:none;
 }
 
-#button-signup{
-    width: 30%;
-    font-family: monospace;
-    padding: 10px;
-
-}

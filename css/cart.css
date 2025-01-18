@@ -1,6 +1,6 @@
 #back-shop-button{
     color: #1c5c69;
-    background-color: #70c5d6;
+    background-color: #a5d6e0c0;
     width: auto;
     height: auto;
     font-size: medium;
@@ -8,7 +8,7 @@
 
 .button-quantity{
     color: #1c5c69;
-    background-color: #70c5d6;
+    background-color: #a5d6e0c0;
     font-size: medium;
     font-family: "Nunito", sans-serif;
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.16);
@@ -37,7 +37,7 @@
 
 #button-pay{
     color: #1c5c69;
-    background-color: #70c5d6;
+    background-color: #a5d6e0c0;
     width: auto;
     height: auto;
     font-size: medium;
@@ -54,4 +54,8 @@
 #empty-cart-text{
     font-size: 20px;
     text-align: center;
+}
+
+.empty-cart{
+    margin: 20px;
 }
