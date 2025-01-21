@@ -1,5 +1,7 @@
 <link rel="stylesheet" type="text/css" href="../css/productPage.css" />
-
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="../css/cart.css" />
+<?php session_start(); ?>
 
 <div class="container-page">
 	<section class="container" id="container-product">
@@ -22,10 +24,16 @@
 						</ul>
 					</section>
 					<section id="buttonArea">
-						<h3 id="textAdd">Agregar a la    </h3>
-						<button class="button"  onclick="addToCart(<?php echo htmlentities($product['book_id']);?>)" id="addToCart">
+						<h3 id="textAdd">Agregar a la </h3>
+						<button class="button" onclick="addToCart(<?php echo htmlentities($product['book_id']); ?>)"
+							id="addToCart">
 							<img src="../resources/icon/shoppingBag.png" id="icon-shopbag" alt="" width="40px">
 						</button>
+						<div id="in-cart-quantity">
+							<button id="button-less" class="button-quantity" onClick="updateQuantity(<?php echo htmlentities($product['book_id']) . ',' . htmlentities(isset($_SESSION['book_quantities'][$book_id]) ? $_SESSION['book_quantities'][$book_id] : 1) . ',' . htmlentities("false"); ?>)" style="width:50px;">-</button>
+							<span id="quantity-<?php echo htmlentities($product['book_id']);?>"> <?php echo htmlentities(isset($_SESSION['book_quantities'][$book_id]) ? $_SESSION['book_quantities'][$book_id] : 1); ?> </span>
+							<button id="button-more" class="button-quantity" onClick="updateQuantity(<?php echo htmlentities($product['book_id']) . ',' . htmlentities(isset($_SESSION['book_quantities'][$book_id]) ? $_SESSION['book_quantities'][$book_id] : 1) . ',' . htmlentities("true");  ?>)" style="width:50px;">+</button>
+						</div>
 					</section>
 				</section>
 			</section>

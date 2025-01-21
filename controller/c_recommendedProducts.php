@@ -1,5 +1,4 @@
 <?php
-// controller/recommendedProducts.php
 
 require_once __DIR__ . '/../model/conectarBD.php';
 require_once __DIR__ . '/../model/m_getRecommendedProducts.php';

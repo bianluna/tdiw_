@@ -128,11 +128,15 @@ v_confirmar_compra
 
 ## POR HACER
 
-* En la tabla de usuarios password tiene que ser no null.
-* El email debe ser único
 * Unificar check email con el password.
 * Hay un BUG cuando se introduce la contraseña incorrecta (creemos)
 * En el carrito hay que manejar las cantidades de libros. En particular un libro repetido no debe aparecer dos veces. 
 * En login no se puede ir al carrito.
+* verificar que todos los controladores cierren la conexión a la BD. (pg_close)
+* desde la página de compra realizada y login la navbar no funciona
+* ponerle fecha a los pedidos en el historial
+* añadir las cantidades
+* Cuando se aumenta la cantidad en el carrito no se actualiza en el footer de compra ni en la cesta superior
+* Ocultar resumen de la compra cuando no hay objetos
 
 

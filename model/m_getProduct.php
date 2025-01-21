@@ -9,7 +9,6 @@ function findProduct($connexio, $book_id)
   return $book_data;
 }
 
-//FIXME: Optimze this function. Use a single query to get all the products
 function getProducts($connexio, $book_ids) {
   $products = array();
   foreach ($book_ids as $book_id) {

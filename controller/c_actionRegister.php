@@ -1,12 +1,37 @@
 <?php
-// controller/saveUser.php
 
 require_once __DIR__ . '/../model/conectarBD.php';
 require_once __DIR__ . '/../model/m_saveUserInDB.php';
 
 $connection = connexionBD();
 
-// Recoger los datos del formulario
+$image="path";
+
+if (isset($_FILES['profile_image']) && !empty($_FILES['profile_image'])) {
+
+    $file=$_FILES['profile_image'];
+    $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+
+    $filesAbsolutePath = '/home/TDIW/tdiw-g6/public_html/uploadedFiles/';
+    $fileName = preg_replace('/[^a-zA-Z0-9_-]/', '', basename($file['name']));
+
+    $destinationPath = $filesAbsolutePath . uniqid() . '_' . $fileName;
+    $image = $destinationPath;
+
+    if (!in_array($file['type'], $allowedTypes)) {
+        die("Error: Solo se permiten imágenes (JPG, PNG, GIF).");
+    }
+    if (move_uploaded_file($file['tmp_name'], $destinationPath)) {
+        echo "Fitxer desat correctament!";
+    } else {
+        echo "Error al moure el fitxer.";
+    }
+} else {
+    echo "Error al pujar el fitxer.";
+}
+
+
+
 $name = $_POST['name'];
 $email = $_POST['email'];
 $password = $_POST['password'];
@@ -15,19 +40,15 @@ $phone_number = $_POST['phone_number'];
 $city = $_POST['city'];
 $postal_code = $_POST['postal_code'];
 
-// Mostrar datos para depuración (opcional, eliminar en producción)
-echo "Nombre: $name, Correo: $email<br>";
 
-// Insertar usuario en la base de datos
-$result_insert = saveUserInDB($connection, $name, $email, $password, $address,  $city, $postal_code, $phone_number);
+
+$result_insert = saveUserInDB($connection, $name, $email, $password, $address,  $city, $postal_code, $phone_number, $image);
 echo "<script>alert('Cuenta creada con éxito');</script>";
-// Mostrar resultado de la inserción (opcional, eliminar en producción)
-echo "Resultado de la inserción: ";
-print_r($result_insert);
 
-
-
-// Cerrar conexión
 pg_close($connection);
+
+header('Location: ../index.php');
+exit;
+
 
 ?>

@@ -7,19 +7,22 @@
 	<?php
 	require __DIR__ . '/controller/c_navbar.php';
 	?>
+	<section class="container-page" id="home"></section>
+	<section class="cart" id="cart-display" style="display: none;"></section>
+	<section id="book-display">
 
-
-	<div class="container-page" id="signup-container">
-		<section class="signup-box">
-			<p id="login-text-box">log in</p>
-			<h1 id="bienvenido-text">Bienvenido!</h1>
-			<p id="instruction-login">Ingresa tu correo para acceder a tu cuenta o crearla.</p>
-			<form method="POST">
-				<input type="email" class="text-field" placeholder="email" name="email" id="emailInput" required>
-				<button class="button" type="button" id="button-login" onclick="checkEmail()">continue</button>
-			</form>
-		</section>
-	</div>
+		<div class="container-page" id="signup-container">
+			<section class="signup-box">
+				<p id="login-text-box">log in</p>
+				<h1 id="bienvenido-text">Bienvenido!</h1>
+				<p id="instruction-login">Ingresa tu correo para acceder a tu cuenta o crearla.</p>
+				<form method="POST">
+					<input type="email" class="text-field" placeholder="email" name="email" id="emailInput" required>
+					<button class="button" type="button" id="button-login" onclick="checkEmail()">continue</button>
+				</form>
+			</section>
+		</div>
+	</section>
 </body>
 
 <footer>

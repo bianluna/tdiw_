@@ -16,6 +16,25 @@
     border-radius: 50px;
 }
 
+#in-cart-quantity .button-quantity {
+    color: #1c5c69;
+    background-color: #a5d6e0c0;
+    font-size: medium;
+    font-family: "Nunito", sans-serif;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.16);
+    border: 0;
+    border-radius: 50px;
+    margin-top: 30px;
+}
+
+.remove-button {
+    color: red;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
 .bottom-section-cart{
 
     display: grid;
@@ -33,6 +52,19 @@
     border-radius: 50px;
     text-align: center;
     color: dimgray;
+}
+
+#in-cart-quantity span {
+    background-color: #70c5d64b;
+    font-size: medium;
+    font-family: "Nunito", sans-serif;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.16);
+    border: 0;
+    border-radius: 50px;
+    text-align: center;
+    color: dimgray;
+    display: inline-block; /* Ensure the span behaves like a block element */
+    padding: 5px 10px; /* Add padding for better appearance */
 }
 
 #button-pay{

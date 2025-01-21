@@ -6,7 +6,6 @@ session_start();
 
 $totalPrice = 0;
 $totalProducts = 0;
-$recentProducts = [];
 
 $connection = connexionBD();
 
@@ -18,11 +17,9 @@ foreach ($product_keys as $key) {
 }
 
 $books_in_cart = getProducts($connection, $product_keys); 
-$total_price = getTotalPrice($books_in_cart, $products);   
 
-$recentProduct = $books_in_cart[array_key_last($books_in_cart)]['title'] ?? null;
+echo json_encode(['cartSize' => $totalProducts]);
 
-include_once __DIR__ . "/../views/v_cartFooter.php";
 pg_close($connection);
 
 ?>

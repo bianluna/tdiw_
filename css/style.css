@@ -22,7 +22,7 @@ h1 {
 
 /* Common elements throughout the website */
 .container-page {
-    padding: 20px;
+
     margin-top: 0px;
 }
 
@@ -304,6 +304,7 @@ h1 {
     text-align: center;
     position: relative;
     padding: 100px;
+    width: -webkit-fill-available;
 }
 
 

@@ -1,22 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
-		rel="stylesheet">
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsividad -->
-	<title>&lt;\bookend&gt;</title>
-	<link rel="icon" href="../media/brand/faviconPage.png" type="image/x-icon">
-	<link rel="stylesheet" type="text/css" href="../css/style.css" />
-	<link rel="stylesheet" type="text/css" href="../css/home.css" />
-	
-	<script src="../js/funciones.js"> </script>
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js"
-		integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-</head>
+<?php include __DIR__ . '/views/v_header.php'; ?>
+<link rel="stylesheet" type="text/css" href="../css/home.css" />
 
 <body>
 
@@ -25,13 +8,12 @@
 	require __DIR__ . '/controller/c_navbar.php';
 	?>
 
-	<!-- Main Content -->
 	<section class="container-page" id="home">
-		<section class="container">
+		<section class="container" id="top-block">
 			<section class="textbox">
 				<h1>¿Qué vas a leer hoy?</h1>
-				<p>Tu próximo libro favorito te espera en esta colección hecha para sorprenderte</p>
-				<button class="button">Descúbrela</button> <!--onclick="goToSection('header_bos')"-->
+				<p>Tu próximo libro favorito te espera en esta página hecha para sorprenderte</p>
+				<img src="../resources/img/coverPic.png" alt="" width="440px">
 			</section>
 		</section>
 
@@ -47,6 +29,7 @@
 			</section>
 		</section>
 
+		<!-- book of the season = bos -->
 		<section class="container" id="bos">
 			<section id="text_bos">
 				<section id="header_bos">
@@ -56,7 +39,6 @@
 				<p>El autor de la serie de libros Before the Coffee Gets Cold, vuelve con nuevos relatos dentro de la
 					misteriosa cafeteria de Tokio donde estos
 					giran entorno a las relaciones y la empatia que requieren.</p>
-				<button class="button" id="button_bos" onclick="">Ver más</button>
 			</section>
 			<section id="cover_bos">
 				<img src="../media/books/bosPic.jpg" alt="" id="img_bos">
@@ -90,8 +72,10 @@
 
 	<!-- Visible cart -->
 	<section class="cart-footer" id="always-visible-cart">
-		<div class="card" id="cart-footer-content">
-			<?php require __DIR__ . '/controller/c_visibleCart.php'; ?>
+		<div id="cart-footer-content">
+			<?php if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
+				require __DIR__ . '/controller/c_visibleCart.php';
+			} ?>
 		</div>
 	</section>
 
@@ -107,17 +91,16 @@
 
 <script>
 	$(function () {
-		// Seleccionar el elemento a observar
+
 		const targetNode = document.getElementById('cart-display');
 
-		// Configurar el observer
 		const observer = new MutationObserver((mutationsList, observer) => {
 			for (let mutation of mutationsList) {
 				if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
 					const displayStyle = window.getComputedStyle(targetNode).display;
 					if (displayStyle === 'none') {
 						console.log('El estilo display ha cambiado a none');
-						// Aquí puedes agregar el código que deseas ejecutar cuando el display sea none
+
 					} else {
 						console.log('El estilo display ha cambiado a', displayStyle);
 						$('.card button').each(function () {
@@ -146,7 +129,7 @@
 											input_element.closest('.card').remove();
 										}
 										input_element.val(response.quantity);
-										response.total_price = response.total_price;
+										response.total_price = parseFloat(response.total_price).toFixed(2);
 										$('#cart-price').text(response.total_price);
 									},
 									error: function (xhr, status, error) {
@@ -160,10 +143,8 @@
 			}
 		});
 
-		// Opciones de configuración del observer
 		const config = { attributes: true, attributeFilter: ['style'] };
 
-		// Iniciar la observación
 		observer.observe(targetNode, config);
 	});
 </script>

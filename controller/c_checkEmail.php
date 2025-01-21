@@ -6,21 +6,26 @@ $email = $_GET["email"];
 
 $connection = connexionBD();
 
-$result_user = checkUserInDB($connection, $email);
+$email = filter_var($email, FILTER_SANITIZE_EMAIL);
 
-if ($result_user){
-    session_start();
+if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $result_user = checkUserInDB($connection, $email);
+    if ($result_user) {
+        session_start();
 
-    $cart_backup = $_SESSION['cart'] ?? [];
+        $cart_backup = $_SESSION['cart'] ?? [];
 
-    session_unset();
-    $_SESSION['user_id'] = $result_user;
-    $_SESSION['cart'] = $cart_backup;
+        session_unset();
+        $_SESSION['user_id'] = $result_user;
+        $_SESSION['cart'] = $cart_backup;
 
-    echo json_encode(true);
+        echo json_encode(true);
+    } else {
+        echo json_encode(false);
+    }
+} else {
+    echo ("$email is not a valid email address");
 }
-else{
-    echo json_encode(false);
-} 
 
+pg_close($connection);
 ?>

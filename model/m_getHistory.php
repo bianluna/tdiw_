@@ -31,7 +31,7 @@ function getOrderHistory($connexio, $user_id)
                 'order_id' => $order_id,
                 'total_price' => $row['total_price'],
                 'date' => $row['date'],
-                'order_lines' => []
+                'order_lines' => [] 
             ];
         }
 
@@ -42,10 +42,7 @@ function getOrderHistory($connexio, $user_id)
         ];
     }
     
-   
-    return array_values($orders);
+    return array_reverse(array_values($orders));
 }
-
-
 
 ?>

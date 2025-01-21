@@ -10,10 +10,10 @@
   }
 
   if (!array_key_exists($book_id, $_SESSION['cart'])) {
-    $_SESSION['cart'][$book_id] = 1;
+    $_SESSION['cart'][$book_id] = $_SESSION['book_quantities'][$book_id] ?? 1;
   } else {
-    $_SESSION['cart'][$book_id]++;
+    $_SESSION['cart'][$book_id]+= $_SESSION['book_quantities'][$book_id] ?? 1;
   } 
 
-  include_once __DIR__."/../views/v_buy.php";
+  echo $book_title . " added to the cart";
 ?>

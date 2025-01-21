@@ -1,70 +1,69 @@
-// Generar dinámicamente los libros
+function showSection(section) {
+    switch (section) {
+        case 'home':
+            document.getElementById('home').style.display = 'inline';
+            document.getElementById('book-display').style.display = 'none';
+            document.getElementById('cart-display').style.display = 'none';
+            break;
+        case 'book-display':
+            document.getElementById('home').style.display = 'none';
+            document.getElementById('book-display').style.display = 'inline';
+            document.getElementById('cart-display').style.display = 'none';
+            break;
+        case 'cart-display':
+            document.getElementById('home').style.display = 'none';
+            document.getElementById('book-display').style.display = 'none';
+            document.getElementById('cart-display').style.display = 'inline';
+            break;
+    }
+}
+
+
+
 async function booksByCategory(event) {
-    // Log the event object for debugging
     console.log('Event object:', event);
 
-    event.preventDefault(); // Prevent the default link behavior
+    event.preventDefault(); 
     console.log('Default action prevented');
 
-    // Get the data-category-id attribute from the clicked anchor
     const categoryId = event.target.getAttribute('data-category-id');
     console.log('Category ID:', categoryId);
 
     try {
-        // Fetch the data from the server
         const response = await fetch(`../controller/c_productListByCat.php?category=${encodeURIComponent(categoryId)}`);
         console.log('Response status:', response.status);
 
         if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
 
-        const books = await response.text(); // Get the response as text
-        console.log('Books data fetched:', books);
-
-        //Update the content of bookByCat
-        const headerElement = document.getElementById('home');
-        headerElement.style.display = 'none';
-        const cartElement = document.getElementById('cart-display');
-        cartElement.style.display = 'none';
-
-        // Update the content in the #category element
+        const books = await response.text();
+        
+        showSection('book-display');
         const categoryElement = document.getElementById('book-display');
-        categoryElement.style.display = 'inline';
-        console.log('Category element:', categoryElement);
-        categoryElement.innerHTML = books; // Update the content
-        console.log('Category content updated');
+        categoryElement.innerHTML = books;
+
     } catch (error) {
         console.error('Error fetching books:', error);
     }
 }
 
-// Generar dinámicamente las cards de categoria
 async function listCategories(event) {
-    // Log the event object for debugging
     console.log('Event object:', event);
 
-    event.preventDefault(); // Prevent the default link behavior
+    event.preventDefault(); 
     console.log('Default action prevented');
 
     try {
-        // Fetch the data from the server
         const response = await fetch("../controller/c_categories.php");
         console.log('Response status:', response.status);
 
         if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
 
-        const categories = await response.text(); // Get the response as text
+        const categories = await response.text(); 
         console.log('Categories data fetched:', categories);
 
-        // Update the content in the #category element
-        const categoryElement = document.getElementById('home');  //('category'); //('book-display');
-        console.log('Category element:', categoryElement);
-        categoryElement.innerHTML = categories; // Update the content
-        categoryElement.style.display = 'inline';
-
-        const bookElement = document.getElementById('book-display');
-        bookElement.style.display = 'none';
-        const cartElement = document.getElementById('cart-display');
-        cartElement.style.display = 'none';
+        showSection('home');
+        const categoryElement = document.getElementById('home'); 
+        categoryElement.innerHTML = categories;
 
         console.log('Category content updated');
     } catch (error) {
@@ -72,65 +71,59 @@ async function listCategories(event) {
     }
 }
 
-// Generar dinámicamente los detalles de los libros
-async function getBook(event) {
-    // Log the event object for debugging
+
+
+async function fetchBookDetails(event) {
+
     console.log('Event object:', event);
 
-    event.preventDefault(); // Prevent the default link behavior
+    event.preventDefault(); 
     console.log('Default action prevented');
 
-    // Get the data-category-id attribute from the clicked anchor
+    
     const bookId = event.target.getAttribute('book-id');
     console.log('Book ID:', bookId);
 
     try {
-        // Fetch the data from the server
+
         const response = await fetch(`../controller/c_product.php?book_id=${encodeURIComponent(bookId)}`);
         console.log('Response status:', response.status);
 
         if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
 
-        const books = await response.text(); // Get the response as text
+        const books = await response.text(); 
         console.log('Book data fetched:', books);
 
-        //Update the content of bookByCat
-        const headerElement = document.getElementById('home');
-        headerElement.style.display = 'none';
-        const cartElement = document.getElementById('cart-display');
-        cartElement.style.display = 'none';
+        window.scrollTo({ top: 0}); 
 
-        // Update the content in the #category element
+        showSection('book-display');
+
         const categoryElement = document.getElementById('book-display');
-        categoryElement.style.display = 'inline';
-        console.log('Category element:', categoryElement);
-        categoryElement.innerHTML = books; // Update the content
-        console.log('Category content updated');
+        categoryElement.innerHTML = books; 
 
     } catch (error) {
         console.error('Error fetching books:', error);
     }
 }
 
+
 async function checkEmail() {
-    // Retrieve the email input value
+
     const emailInput = document.getElementById("emailInput").value;
-    //console.log("Email entered: ", emailInput);
+    
     var response = await fetch("../controller/c_checkEmail.php?email=" + emailInput);
     const responsetxt = await response.text();
     const responsetrim = responsetxt.trim();
 
     if (responsetrim == "true") {
-        //alert("Email already exists. Please log in.");
         window.location.href = "../loginPassword.php";
     } else {
         window.location.href = "../signup.php";
-        //alert("Email not found. Creating a new account.");
     }
 }
 
+
 async function checkPassword() {
-    // Retrieve the email input value
     const passwordInput = document.getElementById("input-password").value;
     var response = await fetch("../controller/c_checkPassword.php?password=" + passwordInput);
     const responsetxt = await response.text();
@@ -143,17 +136,32 @@ async function checkPassword() {
     }
 }
 
+
 async function showCart() {
     var response = await fetch("../controller/c_cart.php");
     const responsetxt = await response.text();
     const responsetrim = responsetxt.trim();
-    const homeElement = document.getElementById('home');
-    homeElement.style.display = 'none';
-    const bookElement = document.getElementById('book-display');
-    bookElement.style.display = 'none';
+
+    showSection('cart-display');
+
     const cartElement = document.getElementById('cart-display');
     cartElement.innerHTML = responsetrim;
-    cartElement.style.display = 'inline';
+}
+
+
+async function updateCartBubble() {
+    const response = await fetch('../controller/c_cartQuantity.php');
+    const data = await response.json();
+
+    const bubble = document.getElementById('cart-bubble');
+    const itemCount = data.cartSize;
+
+    if (itemCount > 0) {
+        bubble.textContent = itemCount;
+        bubble.style.visibility = 'visible';
+    } else {
+        bubble.style.visibility = 'hidden';
+    }
 }
 
 async function addToCart(book_id) {
@@ -169,19 +177,33 @@ async function addToCart(book_id) {
 
     const cartSummary = document.getElementById('cart-footer-content');
     cartSummary.innerHTML = summarytrim;
+
+    if (response.ok) {
+        updateCartBubble();
+    }
+
 }
 
 async function emptyCart() {
     var response = await fetch("../controller/c_emptyCart.php");
     const responsetxt = await response.text();
     const responsetrim = responsetxt.trim();
-    const homeElement = document.getElementById('home');
-    homeElement.style.display = 'none';
-    const bookElement = document.getElementById('book-display');
-    bookElement.style.display = 'none';
+
+    showSection('cart-display');
+
     const cartElement = document.getElementById('cart-display');
     cartElement.innerHTML = responsetrim;
-    cartElement.style.display = 'inline';
+}
+
+async function removeFromCart(book_id) {
+    var response = await fetch("../controller/c_removeFromCart.php?book_id=" + book_id);
+    const responsetxt = await response.text();
+    const responsetrim = responsetxt.trim();
+
+    showSection('cart-display');
+
+    const cartElement = document.getElementById('cart-display');
+    cartElement.innerHTML = responsetrim;
 }
 
 async function pay(user_id) {
@@ -190,9 +212,6 @@ async function pay(user_id) {
         window.location.href = "../login.php";
     }
     else {
-        console.log("User ID: ", user_id);
-        alert("Your are user ID: " + user_id);
-
         var response = await fetch("../controller/c_pay.php?user_id=" + user_id);
         const responsetxt = await response.text();
         const responsetrim = responsetxt.trim();
@@ -223,13 +242,33 @@ async function getHistory() {
     const responsetxt = await response.text();
     const responsetrim = responsetxt.trim();
 
-    const homeElement = document.getElementById('home');
-    homeElement.style.display = 'none';
+    showSection('cart-display');
 
-    const bookElement = document.getElementById('book-display');
-    bookElement.style.display = 'none';
-    
     const cartElement = document.getElementById('cart-display');
     cartElement.innerHTML = responsetrim;
-    cartElement.style.display = 'inline';
+   
+}
+
+async function updateQuantity(book_id, currentQuantity, action) {
+    var response = await fetch("../controller/c_handleProductQuantity.php?book_id=" + book_id + "&quantity=" + currentQuantity + "&more=" + action);
+    const responsetxt = await response.text();
+    console.log("Response text: ", responsetxt);
+    const responsetrim = responsetxt.trim();
+    console.log("Response trim: ", responsetrim);
+
+    const spanElement = document.getElementById(`quantity-${book_id}`);
+    console.log(spanElement);
+    spanElement.innerHTML = responsetrim;
+
+    if (responsetrim == "10") {
+        const buttonElement = document.getElementById('button-more');
+        buttonElement.disabled = true;
+        buttonElement.style.backgroundColor = '#ff6161';
+    }
+    else {
+        const buttonElement = document.getElementById('button-more');
+        buttonElement.disabled = false;
+        buttonElement.style.backgroundColor = '#a5d6e0c0';
+    }
+    
 }

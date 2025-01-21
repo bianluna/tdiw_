@@ -12,7 +12,7 @@ $book_id = $_POST['book_id'];
 $quantity = $_POST['quantity'];
 $action = $_POST['action'];
 
-if ($action == '+') {
+if ($action == '+' && $quantity < 10) {
     $_SESSION['cart'][$book_id]++;
     $products[$book_id] = $_SESSION['cart'][$book_id];
 } else if ($action == '-') {
@@ -31,7 +31,7 @@ $product_keys = array_keys($products);
 $books_in_cart = getProducts($connection, $product_keys); 
 $total_price = getTotalPrice($books_in_cart, $products);  
  
-$output = array('quantity' => $products[$book_id], 
+$output = array('quantity' => isset($products[$book_id]) ? $products[$book_id] : 0,
                 'total_price' => $total_price);
 
 echo json_encode($output  );

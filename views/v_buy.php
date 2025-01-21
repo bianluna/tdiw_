@@ -1,1 +1,0 @@
-<?= $book_title ?> added to the cart
